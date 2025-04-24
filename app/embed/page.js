@@ -2,12 +2,14 @@
 
 import { useSearchParams } from 'next/navigation';
 import ReviewWidget from '../components/ReviewWidget';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { FaStar, FaExternalLinkAlt } from 'react-icons/fa';
 
-export default function EmbedPage() {
+export const dynamic = 'force-dynamic';
+
+function EmbedPageContent() {
   const searchParams = useSearchParams();
   const placeId = searchParams.get('placeId');
   const [place, setPlace] = useState(null);
@@ -126,5 +128,18 @@ export default function EmbedPage() {
         <p>© {new Date().getFullYear()} Google Reviews Widget</p>
       </div>
     </motion.div>
+  );
+}
+
+export default function EmbedPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p className="mt-4 text-gray-600 dark:text-gray-300">Loading widget...</p>
+      </div>
+    </div>}>
+      <EmbedPageContent />
+    </Suspense>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import ReviewWidget from '../components/ReviewWidget';
 import { 
@@ -15,63 +15,9 @@ import {
 } from 'react-icons/fa';
 import { HexColorPicker } from 'react-colorful';
 
-const presetThemes = {
-  minimal: {
-    theme: 'light',
-    accentColor: '#4B5563',
-    showPhotos: false,
-    compactView: true,
-    spacing: 4,
-    layout: 'grid',
-    showVerifiedBadge: false
-  },
-  modern: {
-    theme: 'light',
-    accentColor: '#8B5CF6',
-    showPhotos: true,
-    compactView: false,
-    spacing: 6,
-    layout: 'grid',
-    showVerifiedBadge: true,
-    animationStyle: 'scale'
-  },
-  corporate: {
-    theme: 'light',
-    accentColor: '#2563EB',
-    showPhotos: true,
-    compactView: false,
-    spacing: 8,
-    layout: 'column',
-    showVerifiedBadge: true
-  },
-  dark: {
-    theme: 'dark',
-    accentColor: '#10B981',
-    showPhotos: true,
-    compactView: false,
-    spacing: 6,
-    layout: 'grid',
-    showVerifiedBadge: true
-  }
-};
+export const dynamic = 'force-dynamic';
 
-const defaultSettings = {
-  theme: 'light',
-  accentColor: '#4F46E5',
-  filterRating: 0,
-  sortByDate: true,
-  sortDirection: 'desc',
-  showPhotos: true,
-  compactView: false,
-  maxReviews: 5,
-  layout: 'grid',
-  spacing: 6,
-  cardWidth: 400,
-  showVerifiedBadge: true,
-  animationStyle: 'fade'
-};
-
-export default function WidgetPage() {
+function WidgetPageContent() {
   const searchParams = useSearchParams();
   const placeId = searchParams.get('placeId');
 
@@ -585,5 +531,18 @@ export default function WidgetPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function WidgetPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p className="mt-4 text-gray-600 dark:text-gray-300">Loading widget configuration...</p>
+      </div>
+    </div>}>
+      <WidgetPageContent />
+    </Suspense>
   );
 }
