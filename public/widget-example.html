@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Reviews Widget Example</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex flex-col">
+  <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 py-6">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <div class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-3 rounded-xl shadow-md mr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+            </svg>
+          </div>
+          <h1 class="text-2xl font-bold">Google Reviews Widget Example</h1>
+        </div>
+        <a href="/" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+          Create Your Own Widget
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 max-w-6xl flex-grow py-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">See How It Works</h2>
+      <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">This example demonstrates how the Google Reviews Widget looks when embedded on your website. Customize colors, layout, and more to match your brand.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 mb-16 h-full">
+      <div class="space-y-6 h-full">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 h-[calc(50%-1.5rem)] border border-gray-200 dark:border-gray-700 overflow-y-auto">
+          <h3 class="text-xl font-semibold mb-4 sticky top-0 bg-white dark:bg-gray-800 py-2 z-10">Light Theme Example</h3>
+          <div id="google-reviews-widget-light" class="border border-gray-200 rounded-lg"></div>
+        </div>
+        <div class="bg-gray-800 rounded-xl shadow-lg p-6 h-[calc(50%-1.5rem)] border border-gray-700 overflow-y-auto">
+          <h3 class="text-xl font-semibold mb-4 sticky top-0 bg-gray-800 py-2 z-10 text-white">Dark Theme Example</h3>
+          <div id="google-reviews-widget-dark" class="border border-gray-700 rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+        <h3 class="text-xl font-semibold mb-6">How to Embed the Widget</h3>
+        
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-medium mb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+              </svg>
+              Step 1: Search for your business
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Use our search tool to find your business or any place with Google reviews.</p>
+          </div>
+          
+          <div>
+            <h4 class="font-medium mb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+              </svg>
+              Step 2: Customize your widget
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Choose colors, layout, and display options to match your website's design.</p>
+          </div>
+          
+          <div>
+            <h4 class="font-medium mb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+              </svg>
+              Step 3: Copy the embed code
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Choose between iFrame or JavaScript embed options based on your needs.</p>
+          </div>
+          
+          <div>
+            <h4 class="font-medium mb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+              </svg>
+              Step 4: Paste into your website
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Add the code to your website where you want the reviews to appear.</p>
+          </div>
+        </div>
+        
+        <div class="mt-8 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+          <h4 class="font-medium mb-2">Example Embed Code</h4>
+          <pre class="text-xs bg-gray-800 text-gray-200 p-3 rounded overflow-x-auto"><code>&lt;script src="https://your-domain.com/widget-bundle.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.initGoogleReviewsWidget({
+    containerId: 'google-reviews-widget',
+    placeId: 'YOUR_PLACE_ID',
+    apiUrl: 'https://your-domain.com',
+    theme: 'light',
+    cardWidth: 400,
+    maxReviews: 5
+  });
+&lt;/script&gt;
+&lt;div id="google-reviews-widget"&gt;&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-600 dark:text-gray-400 text-sm">
+        © 2023 Google Reviews Widget. All rights reserved.
+      </p>
+      <p class="text-gray-500 dark:text-gray-500 text-xs mt-1">
+        Not affiliated with Google LLC. Google and the Google logo are registered trademarks of Google LLC.
+      </p>
+    </div>
+  </footer>
+
+  <script src="/widget-bundle.js"></script>
+  <script>
+    // Initialize light theme widget
+    window.initGoogleReviewsWidget({
+      containerId: 'google-reviews-widget-light',
+      placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4', // Example Place ID (Sydney Opera House)
+      apiUrl: window.location.origin,
+      theme: 'light',
+      cardWidth: 400,
+      maxReviews: 3,
+      layout: 'grid'
+    });
+    
+    // Initialize dark theme widget
+    window.initGoogleReviewsWidget({
+      containerId: 'google-reviews-widget-dark',
+      placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4', // Example Place ID (Sydney Opera House)
+      apiUrl: window.location.origin,
+      theme: 'dark',
+      cardWidth: 400,
+      maxReviews: 3,
+      layout: 'grid',
+      accentColor: '#10B981'
+    });
+  </script>
+</body>
+</html>
