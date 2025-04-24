@@ -17,6 +17,43 @@ import { HexColorPicker } from 'react-colorful';
 
 export const dynamic = 'force-dynamic';
 
+const defaultSettings = {
+  theme: 'light',
+  accentColor: '#4F46E5',
+  filterRating: 0,
+  sortByDate: true,
+  sortDirection: 'desc',
+  showPhotos: true,
+  compactView: false,
+  maxReviews: 5,
+  layout: 'grid',
+  spacing: 6,
+  cardWidth: 400,
+  showVerifiedBadge: true,
+  animationStyle: 'fade',
+  enableSlider: false,
+  slidesPerView: { mobile: 1, tablet: 2, desktop: 3 }
+};
+
+const presetThemes = {
+  light: {
+    theme: 'light',
+    accentColor: '#4F46E5'
+  },
+  dark: {
+    theme: 'dark',
+    accentColor: '#10B981'
+  },
+  modern: {
+    theme: 'light',
+    accentColor: '#6366F1'
+  },
+  classic: {
+    theme: 'light',
+    accentColor: '#D97706'
+  }
+};
+
 function WidgetPageContent() {
   const searchParams = useSearchParams();
   const placeId = searchParams.get('placeId');
