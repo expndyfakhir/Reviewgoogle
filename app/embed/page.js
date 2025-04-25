@@ -91,43 +91,13 @@ function EmbedPageContent() {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="p-6 max-w-6xl mx-auto"
-    >
-      {place && (
-        <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{place.name}</h1>
-            {place.formatted_address && (
-              <p className="text-gray-600 dark:text-gray-300 mt-1">{place.formatted_address}</p>
-            )}
-          </div>
-          <a 
-            href={`/widget?placeId=${placeId}`}
-            className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors self-start"
-          >
-            <span>Customize Widget</span>
-            <FaExternalLinkAlt className="ml-2 w-3 h-3" />
-          </a>
-        </div>
-      )}
-      
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-        <ReviewWidget
-          place={place}
-          reviews={place?.reviews || []}
-          {...settings}
-        />
-      </div>
-      
-      <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-        <p>This widget is embedded using the Google Reviews Widget tool.</p>
-        <p>© {new Date().getFullYear()} Google Reviews Widget</p>
-      </div>
-    </motion.div>
+    <div className="h-full w-full">
+      <ReviewWidget
+        place={place}
+        reviews={place?.reviews || []}
+        {...settings}
+      />
+    </div>
   );
 }
 
