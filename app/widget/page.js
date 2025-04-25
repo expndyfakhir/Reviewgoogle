@@ -134,7 +134,7 @@ function WidgetPageContent() {
   src="${window.location.origin}/embed?${params}" 
   width="100%" 
   height="600" 
-  frameborder="0"
+  style="border:none;overflow:hidden" 
   title="Google Reviews Widget">
 </iframe>`;
 
