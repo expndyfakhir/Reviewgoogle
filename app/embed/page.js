@@ -30,7 +30,16 @@ function EmbedPageContent() {
     spacing: parseInt(searchParams.get('spacing') || '6'),
     cardWidth: parseInt(searchParams.get('cardWidth') || '400'),
     showVerifiedBadge: searchParams.get('showVerifiedBadge') === 'true',
-    animationStyle: searchParams.get('animationStyle') || 'fade'
+    animationStyle: searchParams.get('animationStyle') || 'fade',
+    enableSlider: searchParams.get('enableSlider') === 'true',
+    slidesPerView: JSON.parse(searchParams.get('slidesPerView') || '{"mobile":1,"tablet":2,"desktop":3}'),
+    borderRadius: parseInt(searchParams.get('borderRadius') || '12'),
+    customFont: searchParams.get('customFont') || 'inherit',
+    borderWidth: parseInt(searchParams.get('borderWidth') || '1'),
+    borderColor: searchParams.get('borderColor') || '#e5e7eb',
+    shadowSize: searchParams.get('shadowSize') || 'md',
+    hoverEffect: searchParams.get('hoverEffect') || 'none',
+    customCSS: searchParams.get('customCSS') || ''
   };
 
   useEffect(() => {
@@ -90,25 +99,62 @@ function EmbedPageContent() {
     );
   }
 
+  // Check if this is an embed-only view (for external websites)
+  const embedOnly = searchParams.get('embedOnly') === 'true';
+
   return (
-    <div className="h-full w-full">
+    <div className={`h-full w-full ${embedOnly ? 'embed-only' : ''}`} style={{ margin: 0, padding: 0 }}>
       <ReviewWidget
         place={place}
         reviews={place?.reviews || []}
         {...settings}
       />
+      {/* Add custom styles for embed-only mode */}
+      {embedOnly && (
+        <style jsx global>{`
+          html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            background: transparent !important;
+          }
+          .embed-only {
+            border: none !important;
+            box-shadow: none !important;
+          }
+          /* Hide any footer, header or navigation elements */
+          footer, header, nav, .footer, .header, .navigation {
+            display: none !important;
+          }
+          /* Remove any margins that might create extra space */
+          * {
+            margin-bottom: 0 !important;
+          }
+        `}</style>
+      )}
     </div>
   );
 }
 
 export default function EmbedPage() {
+  // Get search params to check if this is an embed-only view
+  let embedOnly = false;
+  
+  // This is a client component, so we need to check if window is defined
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    embedOnly = params.get('embedOnly') === 'true';
+  }
+
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-      <div className="text-center">
-        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-        <p className="mt-4 text-gray-600 dark:text-gray-300">Loading widget...</p>
+    <Suspense fallback={
+      <div className={`flex items-center justify-center ${embedOnly ? 'bg-transparent' : 'min-h-screen bg-gray-50 dark:bg-gray-900'}`}>
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className={`mt-4 ${embedOnly ? 'text-gray-600' : 'text-gray-600 dark:text-gray-300'}`}>Loading widget...</p>
+        </div>
       </div>
-    </div>}>
+    }>
       <EmbedPageContent />
     </Suspense>
   );

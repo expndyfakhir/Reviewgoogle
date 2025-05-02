@@ -4,24 +4,31 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaStar, FaUser, FaCalendarAlt, FaQuoteLeft, FaCheck, FaShieldAlt } from 'react-icons/fa';
 
-export default function ReviewWidget({ 
-  place, 
-  reviews, 
-  filterRating = 0, 
-  sortByDate = true, 
-  sortDirection = 'desc', 
-  showPhotos = true, 
-  compactView = false, 
-  maxReviews = 5, 
-  layout = 'grid', 
-  spacing = 6, 
-  cardWidth = 400, 
+export default function ReviewWidget({
+  place,
+  reviews,
+  filterRating = 0,
+  sortByDate = true,
+  sortDirection = 'desc',
+  showPhotos = true,
+  compactView = false,
+  maxReviews = 5,
+  layout = 'grid',
+  spacing = 6,
+  cardWidth = 400,
   theme = 'light',
   accentColor = '#4F46E5',
   showVerifiedBadge = true,
   animationStyle = 'fade',
   enableSlider = false,
-  slidesPerView = { mobile: 1, tablet: 2, desktop: 3 }
+  slidesPerView = { mobile: 1, tablet: 2, desktop: 3 },
+  customFont = 'inherit',
+  borderRadius = 12,
+  borderWidth = 1,
+  borderColor = '#e5e7eb',
+  shadowSize = 'md',
+  hoverEffect = 'none',
+  customCSS = ''
 }) {
   const [hoveredReview, setHoveredReview] = useState(null);
   const [displayedReviews, setDisplayedReviews] = useState([]);
@@ -135,9 +142,24 @@ export default function ReviewWidget({
 
   // Adjust accent color for dark theme
   const getAccentColor = () => {
-    return theme === 'dark' 
-      ? accentColor 
+    return theme === 'dark'
+      ? accentColor
       : accentColor;
+  };
+
+  const shadowClasses = {
+    none: 'shadow-none',
+    sm: 'shadow-sm',
+    md: 'shadow-md',
+    lg: 'shadow-lg',
+    xl: 'shadow-xl'
+  };
+
+  const hoverEffects = {
+    none: '',
+    lift: 'hover:transform hover:-translate-y-1 hover:shadow-lg transition-all duration-200',
+    glow: 'hover:shadow-glow hover:shadow-[rgba(79,70,229,0.2)] transition-shadow duration-200',
+    scale: 'hover:transform hover:scale-[1.02] transition-transform duration-200'
   };
 
   if (!place || !reviews?.length) {
@@ -163,7 +185,20 @@ export default function ReviewWidget({
   });
 
   return (
-    <div className={`review-widget ${theme === 'dark' ? 'dark' : ''}`}>
+    <div 
+  className={`review-widget ${theme === 'dark' ? 'dark' : ''} ${shadowClasses[shadowSize]} ${hoverEffects[hoverEffect]}`}
+  style={{
+    fontFamily: customFont,
+    borderRadius: `${borderRadius}px`,
+    borderWidth: `${borderWidth}px`,
+    borderColor: borderColor,
+    ...(customCSS ? JSON.parse(customCSS) : {})
+  }}>
+  <style jsx global>{`
+    .shadow-glow {
+      box-shadow: 0 4px 24px -2px ${accentColor}33;
+    }
+  `}</style>
       {/* Place Header with Enhanced Design */}
       <div 
         className={`text-center p-6 rounded-xl mb-6 ${theme === 'dark' 

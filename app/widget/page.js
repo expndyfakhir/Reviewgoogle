@@ -127,18 +127,28 @@ function WidgetPageContent() {
   const generateEmbedCode = () => {
     const params = new URLSearchParams({
       placeId,
-      ...settings
+      ...settings,
+      borderRadius: settings.borderRadius,
+      customFont: settings.customFont,
+      borderWidth: settings.borderWidth,
+      borderColor: settings.borderColor,
+      shadowSize: settings.shadowSize,
+      hoverEffect: settings.hoverEffect,
+      customCSS: settings.customCSS,
+      embedOnly: 'true' // Add parameter to indicate this is an embed-only view
     }).toString();
 
     const iframeCode = `<iframe 
   src="${window.location.origin}/embed?${params}" 
   width="100%" 
-  height="600" 
-  style="border:none;overflow:hidden" 
-  title="Google Reviews Widget">
+  height="500" 
+  style="border:none;overflow:hidden;margin:0;padding:0;display:block;background:transparent" 
+  title="Google Reviews Widget" 
+  scrolling="no" 
+  frameborder="0">
 </iframe>`;
 
-    const wpCode = `<script src="${window.location.origin}/widget-bundle.js"></script>
+    const wpCode = `<script src="${window.location.origin}/embed-widget.js"></script>
 <script>
   window.initGoogleReviewsWidget({
     containerId: 'google-reviews-widget',

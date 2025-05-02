@@ -3,6 +3,9 @@ import { useState, useEffect } from 'https://cdn.skypack.dev/react@18.2.0';
 import { motion, AnimatePresence } from 'https://cdn.skypack.dev/framer-motion@12.6.3';
 import { FaStar, FaUser, FaCalendarAlt, FaQuoteLeft, FaCheck, FaShieldAlt } from 'https://cdn.skypack.dev/react-icons/fa@5.5.0';
 
+// Set global flag for embed-only mode
+const EMBED_ONLY = true;
+
 const ReviewWidget = ({ 
   place, 
   reviews, 
